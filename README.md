@@ -92,7 +92,7 @@ The initial setup was fragile and exposed. To improve durability and usability, 
 After completing the designs in Blender, I 3D printed all components.
 
 <p align="center">
-  <img src="YOUR_PRINTED_PARTS_IMAGE" width="300"/>
+  <img src="images/photo_3_2026-03-18_21-46-55.jpg" width="300"/>
 </p>
 
 ---
