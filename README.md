@@ -83,10 +83,10 @@ The initial setup was fragile and exposed. To improve durability and usability, 
 #### 💻 3D Modeling Process
 
 <p align="center">
-  <img src="/images/photo_9_2026-03-18_21-46-55" width="22%"/>
-  <img src="/images/photo_8_2026-03-18_21-46-55" width="22%"/>
-  <img src="/images/photo_7_2026-03-18_21-46-55" width="22%"/>
-  <img src="/images/photo_6_2026-03-18_21-46-55" width="22%"/>
+  <img src="/images/photo_9_2026-03-18_21-46-55.jpg" width="22%"/>
+  <img src="/images/photo_8_2026-03-18_21-46-55.jpg" width="22%"/>
+  <img src="/images/photo_7_2026-03-18_21-46-55.jpg" width="22%"/>
+  <img src="/images/photo_6_2026-03-18_21-46-55.jpg" width="22%"/>
 </p>
 
 After completing the designs in Blender, I 3D printed all components.
