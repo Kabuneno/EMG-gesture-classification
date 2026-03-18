@@ -3,7 +3,7 @@
 ## 📌 1. Birth of the Idea
 
 <p align="left">
-  <img src="YOUR_IMAGE_LINK_HERE" width="220" align="left" style="margin-right:15px;"/>
+  <img src="/images/05_whatcomesnext" width="220" align="left" style="margin-right:15px;"/>
 </p>
 
 Everything started when I discovered *Orion*, an experimental project by Meta. I was deeply impressed by the level of technology involved — a system combining smart glasses, a neural interface wristband, and compact computing.
