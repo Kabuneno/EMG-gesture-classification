@@ -43,7 +43,7 @@ Such systems can be applied in:
 ## 🔌 3. Hardware: uMyo Sensors
 
 <p align="center">
-  <img src="YOUR_UMYO_IMAGE_LINK" width="300"/>
+  <img src="/images/umyo_wearable_emg_sensor_components_2.png" width="300"/>
 </p>
 
 To avoid building EMG hardware from scratch, I explored existing solutions and discovered **uMyo EMG sensors** developed by *uDevices*.
