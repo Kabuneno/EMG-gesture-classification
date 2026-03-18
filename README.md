@@ -25,7 +25,7 @@ When the brain sends signals to muscles, it does so through electrical impulses.
 Different hand gestures involve different muscle groups. As a result, each gesture produces a unique electrical signal pattern.
 
 <p align="center">
-  <img src="YOUR_GESTURE_IMAGE_LINK" width="300"/>
+  <img src="/images/image.png" width="300"/>
 </p>
 
 This makes it possible to:
