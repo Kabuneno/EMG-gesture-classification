@@ -68,7 +68,7 @@ The system was powered using:
 Additionally, a USB receiver base was used to transmit EMG data to a computer.
 
 <p align="center">
-  <img src="YOUR_RECEIVER_IMAGE" width="150"/>
+  <img src="/images/uMyo_ultimate_base_for_PC_connection.png" width="150"/>
 </p>
 
 ---
