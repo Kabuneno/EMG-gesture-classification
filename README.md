@@ -120,3 +120,201 @@ The main entry point is:
 
 ```bash
 umyo_testing.py
+```
+
+# 🤖 5. Machine Learning Pipeline
+
+## 📊 Data Structure Understanding
+
+Before developing any machine learning solution, it was essential to deeply understand the structure of the data produced by the EMG sensors.
+
+As described in `testing_functionality.pdf`, each incoming data packet contains:
+
+* Device metadata (RSSI, packet ID, length, unit identifiers)
+* Battery information (pb1, pb2, pb3)
+* Raw EMG signal data (constructed from high/low byte pairs across 30+ channels)
+* IMU data:
+
+  * Quaternion components (`qw, qx, qy, qz`)
+  * Acceleration (`ax, ay, az`)
+  * Orientation (`yaw, pitch, roll`)
+* Magnetic sensor data
+
+The data is transmitted at a high rate of **921600 bits per second**, enabling real-time signal processing and large-scale dataset creation.
+
+---
+
+## 🧪 Dataset Creation
+
+The dataset creation process is fully implemented in:
+
+```bash
+dataset_creation.py
+```
+
+To record the data, I developed a **GUI-based recording tool**, which allowed me to:
+
+* Press keyboard buttons to label gestures
+* Perform gestures simultaneously
+* Automatically store synchronized EMG and IMU data
+
+### ✋ Gesture Set
+
+All gestures were performed after forming a fist (activating muscle groups consistently):
+
+* `swipe up` — thumb sliding upward along the index finger
+* `swipe down` — thumb sliding downward
+* `swipe left` — horizontal movement to the left
+* `swipe right` — horizontal movement to the right
+* `left mbutton` — single tap with thumb
+* `left mbutton twice` — double tap
+* `right mbutton` — tap on the opposite side of the index finger
+* `scroll mode` — triple tap across different areas
+* `scroll mode off` — reverse gesture of scroll mode
+
+Each gesture:
+
+* Lasted **1 second**
+* Produced **~250 samples per recording**
+
+### 📦 Dataset Scale
+
+* ⏱️ ~8 hours of recording
+* 🔢 ~2000 gesture samples
+* 📡 High-frequency EMG + IMU data
+
+The dataset was uploaded to **Hugging Face** (private repository).
+
+---
+
+## 🧠 ML Solution
+
+### 🔍 Feature Engineering
+
+Instead of feeding raw signals directly into a model, I designed a **feature extraction pipeline** to convert time-series sensor data into meaningful numerical representations.
+
+For each EMG channel, the following features were extracted:
+
+* **MAV (Mean Absolute Value)** — signal intensity
+* **RMS (Root Mean Square)** — energy estimation
+* **Variance** — signal dispersion
+* **Waveform Length (WL)** — signal complexity
+* **Zero Crossings (ZC)** — frequency characteristics
+* **Slope Sign Changes (SSC)** — dynamic behavior
+
+Additionally:
+
+* Global EMG statistics across all channels were computed
+* Spectral features were extracted and log-scaled
+* Accelerometer features included:
+
+  * Mean, standard deviation, range, energy
+  * Magnitude-based features
+* Quaternion features captured:
+
+  * Orientation stability
+  * Motion dynamics via delta norms
+
+To improve robustness, I also introduced **cross-device features**, such as:
+
+* Energy difference between two sensors
+
+---
+
+### 🌲 Model Selection
+
+For gesture classification, I used a:
+
+```text
+Random Forest Classifier
+```
+
+#### Why Random Forest?
+
+* Handles **high-dimensional feature spaces** well
+* Robust to noise (important for EMG signals)
+* Does not require heavy preprocessing or scaling
+* Works effectively with **tabular engineered features**
+* Provides strong baseline performance without overfitting
+
+The model configuration:
+
+* `n_estimators = 800`
+* `max_features = sqrt`
+* `class_weight = balanced_subsample`
+* Parallelized training (`n_jobs = -1`)
+
+---
+
+### 🏋️ Training Process
+
+The dataset was processed as follows:
+
+1. Feature extraction from raw signals
+
+2. Label encoding of gesture classes
+
+3. Train-test split:
+
+   * 80% training
+   * 20% testing
+   * Stratified sampling
+
+4. Model training on extracted features
+
+5. Evaluation using:
+
+   * Accuracy score
+   * Classification report
+   * Confusion matrix
+
+Additionally, **Stratified K-Fold cross-validation** was applied to ensure model stability.
+
+---
+
+### ⚡ Real-Time Gesture Prediction
+
+To enable real-time usage, I implemented a prediction pipeline:
+
+1. Incoming EMG + IMU data is collected in time windows
+2. The same feature extraction pipeline is applied
+3. Features are aligned using saved feature order
+4. The trained model predicts the gesture
+
+```python
+predict_from_windows(win1, win2)
+```
+
+This allows the system to:
+
+* Process live sensor data
+* Classify gestures instantly
+* Be integrated into interactive applications
+
+---
+
+### 💾 Model Persistence
+
+To ensure reproducibility and deployment:
+
+* Trained model is saved as:
+
+  ```bash
+  model.pkl
+  ```
+* Label encoder:
+
+  ```bash
+  label_encoder.pkl
+  ```
+* Feature order:
+
+  ```bash
+  feature_order.json
+  ```
+
+This guarantees consistent predictions between training and real-time inference.
+
+---
+
+
