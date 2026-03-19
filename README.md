@@ -317,4 +317,100 @@ This guarantees consistent predictions between training and real-time inference.
 
 ---
 
+## ⚡ Real-Time Gesture Prediction
+
+To enable real-time interaction, I implemented a separate pipeline (`realtime.py`) that uses the trained model to classify gestures from live sensor data.
+
+### 🔄 Pipeline Overview
+
+The real-time system follows the same logic as the training pipeline:
+
+1. **Data Acquisition**
+
+   * EMG + IMU data is streamed from uMyo sensors via serial connection (`921600 baud`)
+   * Data is parsed using a custom `umyo_parser`
+   * Two sensors (left and right) are processed simultaneously
+
+2. **1-Second Recording Window**
+
+   * After pressing the **Start** button, the system records data for:
+
+     ```text
+     1.0 second (~250 samples)
+     ```
+   * Data from both sensors is stored separately
+
+3. **Preprocessing**
+
+   * Recorded signals are:
+
+     * Clipped or padded to fixed length (250 samples)
+     * Converted into structured matrices:
+
+       * EMG (8 channels)
+       * Spectral data (16 channels)
+       * Accelerometer (3 axes)
+       * Quaternion (4 components)
+
+4. **Feature Extraction**
+
+   * The exact same feature engineering pipeline used during training is applied:
+
+     * EMG statistical features
+     * Spectral features
+     * Motion and orientation features
+     * Cross-device energy features
+
+5. **Prediction**
+
+   * Pre-trained artifacts are loaded:
+
+     ```bash
+     model.pkl
+     label_encoder.pkl
+     feature_order.json
+     ```
+   * Features are aligned and passed into the model:
+
+     ```python
+     clf.predict_proba(x)
+     ```
+   * The system outputs:
+
+     * Predicted gesture label
+     * Confidence score
+
+---
+
+### 🖥️ User Interface
+
+A simple GUI (built with `tkinter`) allows interaction:
+
+* **Start / Continue button** — triggers recording
+* **Status label** — shows system state
+* **Prediction label** — displays recognized gesture
+
+<p align="center">
+  <img src="YOUR_GUI_SCREENSHOT" width="350"/>
+</p>
+
+The workflow is:
+
+1. Press **Start**
+2. Perform a gesture
+3. Wait ~1 second
+4. Receive prediction
+
+---
+
+### ⚙️ Key Design Decisions
+
+* Reused **identical feature pipeline** → ensures consistency between training and inference
+* Fixed-size time windows → stable input for the model
+* Lightweight model (**Random Forest**) → fast inference without GPU
+* Threaded execution → prevents GUI freezing during recording
+
+---
+
+
 
