@@ -146,21 +146,21 @@ def extract_features_device(emg, sp, acc, quat, tag: str) -> Dict[str, float]:
     f.update({f"{tag}_{k}": v for k, v in features_emg(emg).items()})
     f.update({f"{tag}_{k}": v for k, v in features_spectr(sp).items()})
     f.update({f"{tag}_{k}": v for k, v in features_accel(acc).items()})
-    f.update({f"{tag}_{k}": v for k, v in features_quat(quat).items()})
+    f.update({f"{tag}_{k}": v for k,v in features_quat(quat).items()})
     return f
 
 
 
 def extract_features_sample(sample: dict) -> Dict[str, float]:
-    emg1  = assemble_series(sample, 'emg1_', 8)
-    sp1   = assemble_series(sample, "spectr1_",  16)
-    acc1  = assemble_series(sample, 'accel_1_', 3)
-    q1    = assemble_series(sample, "quat_1_",   4)
+    emg1= assemble_series(sample, 'emg1_', 8)
+    sp1 = assemble_series(sample, "spectr1_",  16)
+    acc1= assemble_series(sample, 'accel_1_', 3)
+    q1 = assemble_series(sample, "quat_1_",   4)
 
-    emg2  = assemble_series(sample, "emg2_", 8)
-    sp2   = assemble_series(sample, 'spectr2_', 16)
-    acc2  = assemble_series(sample, "accel_2_", 3)
-    q2    = assemble_series(sample, "quat_2_", 4)
+    emg2 = assemble_series(sample, "emg2_", 8)
+    sp2 = assemble_series(sample, 'spectr2_',16)
+    acc2 = assemble_series(sample, "accel_2_", 3)
+    q2 = assemble_series(sample, "quat_2_", 4)
 
     f1 = extract_features_device(emg1, sp1, acc1, q1, "d1")
     f2 = extract_features_device(emg2, sp2, acc2, q2, "d2")
