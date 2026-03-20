@@ -1,6 +1,6 @@
 # 🧠 EMG Gesture Classification Project
 
-## 📌 1. Birth of the Idea
+# 📌 1. Birth of the Idea
 
 <p align="left">
   <img src="/images/05_whatcomesnext.png" width="220" align="left" style="margin-right:15px;"/>
@@ -16,7 +16,7 @@ However, after analyzing its components, I realized that the glasses themselves 
 
 ---
 
-## ⚡ 2. EMG Technology
+# ⚡ 2. EMG Technology
 
 Electromyography (EMG) is a technique used to measure the electrical activity produced by muscles.
 
@@ -40,7 +40,7 @@ Such systems can be applied in:
 
 ---
 
-## 🔌 3. Hardware: uMyo Sensors
+# 🔌 3. Hardware: uMyo Sensors
 
 <p align="center">
   <img src="/images/umyo_wearable_emg_sensor_components_2.png" width="300"/>
@@ -52,7 +52,7 @@ I acquired two uMyo sensors, which provided a reliable and open-source platform 
 
 ---
 
-## 🛠️ 4. Working with the EMG Environment
+# 🛠️ 4. Working with the EMG Environment
 
 ### 🔋 Hardware Setup
 
@@ -122,7 +122,7 @@ The main entry point is:
 umyo_testing.py
 ```
 
-## 🤖 5. Machine Learning Pipeline
+# 🤖 5. Machine Learning Pipeline
 
 ## 📊 Data Structure Understanding
 
