@@ -122,7 +122,7 @@ The main entry point is:
 umyo_testing.py
 ```
 
-# 🤖 5. Machine Learning Pipeline
+## 🤖 5. Machine Learning Pipeline
 
 ## 📊 Data Structure Understanding
 
