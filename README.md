@@ -102,7 +102,7 @@ After completing the designs in Blender, I 3D printed all components.
 After assembling all components, the final device looked like this:
 
 <p align="center">
-  <video src="https://youtu.be/Rec0a1UBz0Q?si=YfXHoDZ0rH6Dmed8" width="350" controls></video>
+  <img src="images/EMG_assemble.jpg" width="300"/>
 </p>
 
 ---
