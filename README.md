@@ -393,7 +393,7 @@ A simple GUI (built with `tkinter`) allows interaction:
 * **Prediction label** — displays recognized gesture
 
 <p align="center">
-  <img src="YOUR_GUI_SCREENSHOT" width="350"/>
+  <img src="images/Screenshot 2026-03-20 112351.png" width="350"/>
 </p>
 
 The workflow is:
